@@ -11,3 +11,9 @@ export const typeDefs = gql`
     todos: [Todo]
   }
 `;
+
+export type Todo = {
+  id: string;
+  name: string;
+  completed: boolean;
+};
