@@ -9,8 +9,8 @@ import {
 export const todos = pgTable('todos', {
   id: serial('id').primaryKey(),
   title: varchar('title', { length: 256 }).notNull(),
-  createdAt: timestamp('createdAt').defaultNow().notNull(),
-  completed: boolean('completed').default(false).notNull(),
+  createdAt: timestamp('createdAt').defaultNow(),
+  completed: boolean('completed').default(false),
 });
 
 export type Todo = typeof todos.$inferSelect; // return type when queried

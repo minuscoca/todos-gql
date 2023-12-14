@@ -3,10 +3,10 @@ import { initializeApollo } from '../apollo/client'
 import { Container, Box } from '@mui/material';
 import AppHeader from './components/app-header';
 import TodoList from './components/todo-list';
-import type { Todo } from '../apollo/type-defs';
+import type { Todo } from '../db/schema/todos';
 
-const TodosQuery = gql`
-  query TodosQuery {
+const TODOS = gql`
+  query GetTodos {
     todos {
       id
       title
@@ -16,7 +16,7 @@ const TodosQuery = gql`
 `
 
 export default function Home() {
-  const { data: { todos } } = useQuery<{ todos: Todo[] }>(TodosQuery)
+  const { data: { todos } } = useQuery<{ todos: Todo[] }>(TODOS)
 
   return (
     <>
@@ -34,7 +34,7 @@ export async function getServerSideProps() {
   const apolloClient = initializeApollo()
 
   await apolloClient.query({
-    query: TodosQuery,
+    query: TODOS,
   })
 
   return {
