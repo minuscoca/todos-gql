@@ -16,7 +16,7 @@ const TodosQuery = gql`
 `
 
 export default function Home() {
-  const { data: { todos }, } = useQuery<{ todos: Todo[] }>(TodosQuery)
+  const { data: { todos } } = useQuery<{ todos: Todo[] }>(TodosQuery)
 
   return (
     <>
