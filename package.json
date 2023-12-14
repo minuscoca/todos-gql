@@ -1,9 +1,12 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "generate-migration": "drizzle-kit generate:pg",
+    "migrate": "ts-node-esm db/migrate.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",
@@ -19,6 +22,7 @@
     "@mui/material-nextjs": "^5.15.0",
     "@vercel/postgres": "^0.5.1",
     "deepmerge": "4.2.2",
+    "dotenv": "^16.3.1",
     "drizzle-orm": "^0.29.1",
     "graphql": "^16.6.0",
     "next": "latest",
@@ -32,6 +36,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "drizzle-kit": "^0.20.6",
+    "ts-node": "^10.9.2",
     "typescript": "^4.7.4"
   }
 }
