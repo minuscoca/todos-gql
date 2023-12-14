@@ -3,7 +3,7 @@ import { Head, Html, Main, NextScript, type DocumentProps } from 'next/document'
 
 export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps) {
   return (
-    <Html lang="en" style={{ backgroundColor: '#121212' }}>
+    <Html lang="en">
       <Head>
         <DocumentHeadTags {...props} />
       </Head>
