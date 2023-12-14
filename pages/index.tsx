@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/client'
 import { initializeApollo } from '../apollo/client'
-import { Checkbox, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { CssBaseline, Checkbox, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Container, Box } from '@mui/material';
+import AppHeader from './components/app-header';
 
 type Todo = {
   id: string
@@ -51,7 +52,15 @@ function TodoList() {
 
 export default function Home() {
   return (
-    <TodoList />
+    <>
+      <CssBaseline />
+      <AppHeader />
+      <Container>
+        <Box sx={{ mt: 8 }}>
+          <TodoList />
+        </Box>
+      </Container>
+    </>
   )
 }
 
