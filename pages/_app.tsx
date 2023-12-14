@@ -9,7 +9,7 @@ import createEmotionCache from '../libs/createEmotionCache';
 const clientSideEmotionCache = createEmotionCache();
 const darkTheme = createTheme({
   palette: {
-    mode: 'light',
+    mode: 'dark',
   },
 });
 
