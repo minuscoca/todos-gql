@@ -15,7 +15,7 @@ function TodoItem({ data }: { data: Todo }) {
           />
         </ListItemIcon>
         <ListItemText>
-          {data.name}
+          {data.title}
         </ListItemText>
       </ListItemButton>
     </ListItem>

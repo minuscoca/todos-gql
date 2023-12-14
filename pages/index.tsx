@@ -9,7 +9,7 @@ const TodosQuery = gql`
   query TodosQuery {
     todos {
       id
-      name
+      title
       completed
     }
   }

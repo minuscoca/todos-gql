@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 export const typeDefs = gql`
   type Todo {
     id: ID!
-    name: String!
+    title: String!
     completed: Boolean!
   }
 
@@ -14,6 +14,6 @@ export const typeDefs = gql`
 
 export type Todo = {
   id: string;
-  name: string;
+  title: string;
   completed: boolean;
 };
