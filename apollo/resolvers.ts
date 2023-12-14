@@ -1,7 +1,12 @@
 export const resolvers = {
   Query: {
-    viewer() {
-      return { id: 1, name: 'John Smith', status: 'cached' }
+    todos() {
+      return [
+        { id: 1, name: 'Milk', completed: false },
+        { id: 2, name: 'Apple', completed: false },
+        { id: 3, name: 'Orange', completed: false },
+        { id: 4, name: 'Egg', completed: true },
+      ];
     },
   },
-}
+};
