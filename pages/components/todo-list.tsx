@@ -1,9 +1,9 @@
-import { Checkbox, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Checkbox, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import type { Todo } from '../../apollo/type-defs';
 
 function TodoItem({ data }: { data: Todo }) {
   return (
-    <ListItem disablePadding    >
+    <ListItem disablePadding>
       <ListItemButton role={undefined} dense>
         <ListItemIcon>
           <Checkbox
@@ -22,7 +22,8 @@ function TodoItem({ data }: { data: Todo }) {
   )
 }
 
-export default function TodoList({ data }: { data: Todo[] }) {
+export default function TodoList({ data }: { data?: Todo[] }) {
+  if (!data) return <Typography>All done</Typography>
   return (
     <List>
       {data.map(todo => <TodoItem key={todo.id} data={todo} />)}
