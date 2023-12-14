@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/client'
 import { initializeApollo } from '../apollo/client'
+import { Checkbox, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 type Todo = {
   id: string
@@ -20,21 +21,31 @@ const TodosQuery = gql`
 
 function TodoItem({ data }: { data: Todo }) {
   return (
-    <li>
-      <div>
-        {data.name}
-        {data.completed ? 'DONE' : 'TODO'}
-      </div>
-    </li>
+    <ListItem>
+      <ListItemButton role={undefined} dense>
+        <ListItemIcon>
+          <Checkbox
+            edge='start'
+            checked={data.completed}
+            tabIndex={-1}
+            disableRipple
+            inputProps={{ 'aria-labelledby': `todo-item-${data.id}-label` }}
+          />
+        </ListItemIcon>
+        <ListItemText>
+          {data.name}
+        </ListItemText>
+      </ListItemButton>
+    </ListItem>
   )
 }
 
 function TodoList() {
   const { data: { todos }, } = useQuery<{ todos: Todo[] }>(TodosQuery)
   return (
-    <ul>
+    <List>
       {todos.map(todo => <TodoItem key={todo.id} data={todo} />)}
-    </ul>
+    </List>
   )
 }
 
