@@ -1,5 +1,4 @@
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/client'
+import { useQuery, gql } from '@apollo/client'
 import { initializeApollo } from '../apollo/client'
 import { Container, Box } from '@mui/material';
 import AppHeader from './components/app-header';
