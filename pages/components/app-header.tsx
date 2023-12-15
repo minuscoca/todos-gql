@@ -8,21 +8,28 @@ import { GET_TODOS } from "..";
 
 const ADD_TODO = gql`
   mutation AddTodo($title: String!)  {
-    addTodo(title: $title) {
-      todo {
-        id
-        title
-      }
+    addTodo(title: $title) {  
+      id
+      title
     }
   }
 `
 
 function AddTodoDialog({ open, onClose }: { open: boolean, onClose: () => void }) {
   const [input, setInput] = useState('')
-  const [addTodo, { loading }] = useMutation<Todo>(
+  const [addTodo, { loading }] = useMutation(
     ADD_TODO, {
     variables: { title: input },
     refetchQueries: [GET_TODOS],
+    optimisticResponse: {
+      addTodo: {
+        __typename: "Todo",
+        id: 99999999,
+        title: input,
+        isCompleted: false,
+        createdAt: new Date(),
+      }
+    },
     onCompleted: () => setInput(''),
   })
 

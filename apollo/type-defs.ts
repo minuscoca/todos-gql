@@ -6,11 +6,8 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    addTodo(title: String!): AddTodoResponse!
-  }
-
-  type AddTodoResponse {
-    todo: Todo
+    addTodo(title: String!): Todo!
+    completeTodo(id: Int!, isCompleted: Boolean!): Todo!
   }
 
   type Todo {

@@ -1,25 +1,36 @@
+import { eq } from 'drizzle-orm';
 import db from '../db/db';
 import { todos, type NewTodo, type Todo } from '../db/schema/todos';
 
 export const resolvers = {
   Query: {
     todos: async () => {
-      const todos = (await db.query.todos.findMany()) as Todo[];
-      console.log('todos', todos);
-      return todos;
+      const data = (await db
+        .select()
+        .from(todos)
+        .orderBy(todos.createdAt)) as Todo[];
+      console.log('todos', data);
+      return data;
     },
   },
 
   Mutation: {
-    addTodo: async (_, args: NewTodo) => {
-      const newTodo = await db
+    addTodo: async (_, args: Pick<NewTodo, 'title'>) => {
+      const newTodos = await db
         .insert(todos)
         .values({ title: args.title })
         .returning();
-      console.log('newTodo', newTodo);
-      return {
-        todo: newTodo[0],
-      };
+      console.log('newTodos', newTodos);
+      return newTodos[0];
+    },
+    completeTodo: async (_, args: Pick<Todo, 'id' | 'isCompleted'>) => {
+      const updatedTodos = await db
+        .update(todos)
+        .set({ isCompleted: args.isCompleted })
+        .where(eq(todos.id, args.id))
+        .returning();
+      console.log('updatedTodos', updatedTodos);
+      return updatedTodos[0];
     },
   },
 };
