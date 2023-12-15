@@ -2,8 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import { AppBar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
-import { useState } from "react";
-import { Todo } from "../../db/schema/todos";
+import { useState } from "react";;
 import { GET_TODOS } from "..";
 
 const ADD_TODO = gql`

@@ -53,5 +53,22 @@ export const resolvers = {
       console.log('updatedTodos', updatedTodos);
       return updatedTodos[0];
     },
+    editTodo: async (_, args: Pick<Todo, 'id' | 'title'>) => {
+      const updatedTodos = await db
+        .update(todos)
+        .set({ title: args.title, updatedAt: new Date() })
+        .where(eq(todos.id, args.id))
+        .returning();
+      console.log('updatedTodos', updatedTodos);
+      return updatedTodos[0];
+    },
+    deleteTodo: async (_, args: Pick<Todo, 'id'>) => {
+      const deletedTodos = await db
+        .delete(todos)
+        .where(eq(todos.id, args.id))
+        .returning();
+      console.log('deletedTodos', deletedTodos);
+      return deletedTodos[0];
+    },
   },
 };
