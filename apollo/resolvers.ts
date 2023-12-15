@@ -27,7 +27,6 @@ export const resolvers = {
         .select()
         .from(todos)
         .orderBy(todos.createdAt)) as Todo[];
-      // console.log('todos', data);
       return data;
     },
   },
@@ -38,19 +37,14 @@ export const resolvers = {
         .insert(todos)
         .values({ title: args.title })
         .returning();
-      console.log('newTodos', newTodos);
       return newTodos[0];
     },
-    completeTodo: async (
-      _,
-      args: Pick<Todo, 'id' | 'isCompleted' | 'updatedAt'>
-    ) => {
+    completeTodo: async (_, args: Pick<Todo, 'id' | 'isCompleted'>) => {
       const updatedTodos = await db
         .update(todos)
         .set({ isCompleted: args.isCompleted, updatedAt: new Date() })
         .where(eq(todos.id, args.id))
         .returning();
-      console.log('updatedTodos', updatedTodos);
       return updatedTodos[0];
     },
     editTodo: async (_, args: Pick<Todo, 'id' | 'title'>) => {
@@ -59,7 +53,6 @@ export const resolvers = {
         .set({ title: args.title, updatedAt: new Date() })
         .where(eq(todos.id, args.id))
         .returning();
-      console.log('updatedTodos', updatedTodos);
       return updatedTodos[0];
     },
     deleteTodo: async (_, args: Pick<Todo, 'id'>) => {
@@ -67,7 +60,6 @@ export const resolvers = {
         .delete(todos)
         .where(eq(todos.id, args.id))
         .returning();
-      console.log('deletedTodos', deletedTodos);
       return deletedTodos[0];
     },
   },

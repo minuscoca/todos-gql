@@ -88,8 +88,6 @@ function AddTodoDialog({ open, onClose }: { open: boolean, onClose: () => void }
 
 export default function AppHeader() {
   const [open, setOpen] = useState(false)
-  const handleClose = () => setOpen(false)
-  const handleOpen = () => setOpen(true)
 
   return (
     <>
@@ -106,14 +104,14 @@ export default function AppHeader() {
               edge="end"
               color="primary"
               aria-label="add-todo"
-              onClick={handleOpen}
+              onClick={() => setOpen(true)}
             >
               <AddIcon />
             </IconButton>
           </Tooltip>
         </Toolbar>
       </AppBar>
-      <AddTodoDialog open={open} onClose={handleClose} />
+      <AddTodoDialog open={open} onClose={() => setOpen(false)} />
     </>
   )
 }
