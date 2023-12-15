@@ -1,10 +1,10 @@
 import db from '../db/db';
-import { todos, type NewTodo } from '../db/schema/todos';
+import { todos, type NewTodo, type Todo } from '../db/schema/todos';
 
 export const resolvers = {
   Query: {
     todos: async () => {
-      const todos = await db.query.todos.findMany();
+      const todos = (await db.query.todos.findMany()) as Todo[];
       console.log('todos', todos);
       return todos;
     },
@@ -18,7 +18,7 @@ export const resolvers = {
         .returning();
       console.log('newTodo', newTodo);
       return {
-        todo: newTodo,
+        todo: newTodo[0],
       };
     },
   },

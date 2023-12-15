@@ -5,18 +5,18 @@ import AppHeader from './components/app-header';
 import TodoList from './components/todo-list';
 import type { Todo } from '../db/schema/todos';
 
-const TODOS = gql`
+export const GET_TODOS = gql`
   query GetTodos {
     todos {
       id
       title
-      completed
+      isCompleted
     }
   }
 `
 
 export default function Home() {
-  const { data: { todos } } = useQuery<{ todos: Todo[] }>(TODOS)
+  const { data: { todos } } = useQuery<{ todos: Todo[] }>(GET_TODOS)
 
   return (
     <>
@@ -34,7 +34,7 @@ export async function getServerSideProps() {
   const apolloClient = initializeApollo()
 
   await apolloClient.query({
-    query: TODOS,
+    query: GET_TODOS,
   })
 
   return {

@@ -15,6 +15,13 @@
       "when": 1702560819390,
       "tag": "0001_dark_justin_hammer",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1702626194837,
+      "tag": "0002_slippery_wither",
+      "breakpoints": true
     }
   ]
 }

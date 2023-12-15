@@ -1,5 +1,5 @@
 import { Checkbox, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
-import type { Todo } from '../../apollo/type-defs';
+import type { Todo } from '../../db/schema/todos';
 
 function TodoItem({ data }: { data: Todo }) {
   return (
@@ -8,7 +8,7 @@ function TodoItem({ data }: { data: Todo }) {
         <ListItemIcon>
           <Checkbox
             edge='start'
-            checked={data.completed}
+            checked={data.isCompleted}
             tabIndex={-1}
             disableRipple
             inputProps={{ 'aria-labelledby': `todo-item-${data.id}-label` }}

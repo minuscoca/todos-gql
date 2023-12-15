@@ -14,8 +14,8 @@ export const typeDefs = gql`
   }
 
   type Todo {
-    id: ID!
+    id: Int!
     title: String!
-    completed: Boolean!
+    isCompleted: Boolean!
   }
 `;

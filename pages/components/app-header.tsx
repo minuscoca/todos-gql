@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { AppBar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
 import { useState } from "react";
 import { Todo } from "../../db/schema/todos";
+import { GET_TODOS } from "..";
 
 const ADD_TODO = gql`
   mutation AddTodo($title: String!)  {
@@ -18,10 +19,11 @@ const ADD_TODO = gql`
 
 function AddTodoDialog({ open, onClose }: { open: boolean, onClose: () => void }) {
   const [input, setInput] = useState('')
-  const [addTodo] = useMutation<Todo>(
+  const [addTodo, { loading }] = useMutation<Todo>(
     ADD_TODO, {
     variables: { title: input },
-    onCompleted: (data) => { console.log(data) }
+    refetchQueries: [GET_TODOS],
+    onCompleted: () => setInput(''),
   })
 
   const handleSave = async () => {
@@ -29,12 +31,18 @@ function AddTodoDialog({ open, onClose }: { open: boolean, onClose: () => void }
     onClose()
   }
 
+  const handleClose = () => {
+    if (loading) return
+    onClose()
+  }
+
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Add todo</DialogTitle>
       <IconButton
         aria-label="close"
-        onClick={onClose}
+        disabled={loading}
+        onClick={handleClose}
         sx={{
           position: 'absolute',
           right: 8,
@@ -58,7 +66,12 @@ function AddTodoDialog({ open, onClose }: { open: boolean, onClose: () => void }
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleSave}>Save</Button>
+        <Button
+          onClick={handleSave}
+          disabled={loading || !input}
+        >
+          {loading ? 'Loading' : 'Save'}
+        </Button>
       </DialogActions>
     </Dialog>
   )
