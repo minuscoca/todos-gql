@@ -11,6 +11,9 @@ const ADD_TODO = gql`
     addTodo(title: $title) {  
       id
       title
+      isCompleted
+      createdAt
+      updatedAt
     }
   }
 `

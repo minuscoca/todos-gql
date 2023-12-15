@@ -9,6 +9,8 @@ const COMPLETE_TODO = gql`
       id
       title
       isCompleted
+      createdAt
+      updatedAt
     }
   }
 `

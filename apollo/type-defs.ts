@@ -1,6 +1,12 @@
 import { gql } from '@apollo/client';
 
 export const typeDefs = gql`
+  scalar Date
+
+  type MyType {
+    created: Date
+  }
+
   type Query {
     todos: [Todo]
   }
@@ -14,5 +20,7 @@ export const typeDefs = gql`
     id: Int!
     title: String!
     isCompleted: Boolean!
+    createdAt: Date!
+    updatedAt: Date!
   }
 `;
